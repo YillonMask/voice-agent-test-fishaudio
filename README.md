@@ -1,5 +1,7 @@
 # Fish Recovery
 
+**English** · [简体中文](./README.zh-CN.md)
+
 > A real-time, FDCPA-compliant debt-collection voice agent — voiced by **Fish Audio TTS**.
 
 Meet **Rissa**: a voice agent that picks up the phone, introduces herself, verifies a debtor, handles objections (hardship, dispute, already-paid), proposes a payment plan, and confirms the agreement — without ever saying something the FDCPA forbids. Every reply runs through a compliance gate before it reaches Fish Audio for synthesis.
