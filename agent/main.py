@@ -127,7 +127,7 @@ async def entrypoint(ctx: JobContext) -> None:
                 "configurable": {"thread_id": ctx.room.name},
             },
         ),
-        # Wrap the Gemini TTS in our parallel-per-sentence adapter so
+        # Wrap Fish Audio TTS in our parallel-per-sentence adapter so
         # sentence N+1's synthesize() request is kicked off as soon as the
         # sentence boundary is detected, instead of waiting for sentence N's
         # audio frames to fully arrive. Audio is still emitted in order.
