@@ -1,0 +1,17 @@
+# LiveKit Agents core + the plugins called out in the verified architecture doc.
+livekit-agents[silero,deepgram,fishaudio,turn-detector]>=1.5.9
+livekit-plugins-langchain>=1.5.9
+livekit-api>=1.0.0
+
+# LangGraph + LangChain core (graph nodes + checkpointer).
+# Pinned to 0.6.x: 1.x removed get_stream_writer()'s runnable-context fallback,
+# which agent/nodes.py::generate relies on for stream_mode="custom".
+langgraph>=0.6.0,<1.0
+langchain-core>=0.3.0,<1.0
+
+# Gemini 3.5 Flash (released 2026-05-19) via LangChain.
+# Pinned to 2.x: 3.x+ requires langchain-core>=1.2.29, which conflicts with
+# the langgraph 0.6.x pin above.
+langchain-google-genai>=2.1.0,<3.0
+
+python-dotenv>=1.0.0

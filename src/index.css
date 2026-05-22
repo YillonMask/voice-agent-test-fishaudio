@@ -1,0 +1,264 @@
+@import "tailwindcss";
+
+:root {
+  --bg-cream: #faf6f2;
+  --bg-rose: #f7e4ea;
+  --bg-violet: #ebe4f4;
+  --bg-lavender: #e8e1f2;
+  --ink: #1c1820;
+  --ink-soft: #5d5562;
+  --ink-faint: #9a93a3;
+  --rose-deep: #b7458a;
+  --rose: #ff6ec7;
+  --magenta: #d04ce8;
+  --violet: #8b5cf6;
+  --indigo-deep: #4338ca;
+  --emerald: #10a981;
+  --amber: #f59e0b;
+  --rose-text: #9d3673;
+  --glass-fill: rgba(255, 255, 255, 0.46);
+  --glass-fill-deep: rgba(255, 255, 255, 0.62);
+  --glass-stroke: rgba(255, 255, 255, 0.7);
+  --glass-stroke-soft: rgba(255, 255, 255, 0.45);
+}
+
+* { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: "Inter Tight", system-ui, -apple-system, sans-serif;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  /* Muted dusk: warm bone → faint dusty rose → faint lavender.
+     The candy-pink bloom is now provided exclusively (and lightly)
+     by <AmbientOrb/>. The body just sets a quiet, slightly desaturated
+     stage that lets the canvas orb own the focus. */
+  background:
+    radial-gradient(110% 70% at 100% -10%, rgba(208, 168, 196, 0.08) 0%, transparent 55%),
+    radial-gradient(80% 60% at -10% 110%, rgba(120, 100, 160, 0.07) 0%, transparent 60%),
+    linear-gradient(180deg, #f5f1ec 0%, #efe6e6 50%, #e9e3ec 100%);
+  background-attachment: fixed;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(208, 76, 232, 0.28);
+  color: #2a1230;
+}
+
+.font-display { font-family: "Instrument Serif", "Times New Roman", serif; font-weight: 400; letter-spacing: -0.02em; }
+.font-mono    { font-family: "JetBrains Mono", ui-monospace, monospace; letter-spacing: 0; }
+
+/* ── Glass primitives ──────────────────────────────────────────────── */
+
+.glass {
+  background: var(--glass-fill);
+  -webkit-backdrop-filter: blur(28px) saturate(170%);
+  backdrop-filter: blur(28px) saturate(170%);
+  border: 1px solid var(--glass-stroke);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.75),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.22),
+    0 12px 36px rgba(60, 30, 90, 0.07),
+    0 2px 6px rgba(60, 30, 90, 0.04);
+}
+
+.glass-thin {
+  background: rgba(255, 255, 255, 0.34);
+  -webkit-backdrop-filter: blur(22px) saturate(160%);
+  backdrop-filter: blur(22px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.65),
+    0 6px 24px rgba(60, 30, 90, 0.05);
+}
+
+.glass-deep {
+  background: var(--glass-fill-deep);
+  -webkit-backdrop-filter: blur(42px) saturate(190%);
+  backdrop-filter: blur(42px) saturate(190%);
+  border: 1px solid var(--glass-stroke);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.85),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.25),
+    0 28px 70px rgba(80, 40, 120, 0.1),
+    0 4px 14px rgba(80, 40, 120, 0.05);
+}
+
+/* Glossy button — pearlescent top highlight + soft inner shadow */
+.gloss {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.5) 55%, rgba(255, 255, 255, 0.62) 100%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 1),
+    inset 0 -1px 0 rgba(28, 24, 32, 0.06),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.3),
+    0 6px 20px rgba(60, 30, 90, 0.1),
+    0 1px 2px rgba(60, 30, 90, 0.06);
+  transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 280ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.gloss:hover { transform: translateY(-1px); box-shadow:
+  inset 0 1px 0 rgba(255, 255, 255, 1),
+  inset 0 -1px 0 rgba(28, 24, 32, 0.06),
+  0 14px 38px rgba(60, 30, 90, 0.14),
+  0 2px 4px rgba(60, 30, 90, 0.08); }
+.gloss:active { transform: translateY(0); }
+
+.gloss-dark {
+  background:
+    linear-gradient(180deg, #2a1f30 0%, #16101c 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #f8f5fa;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.4),
+    0 12px 36px rgba(28, 14, 50, 0.32),
+    0 2px 6px rgba(28, 14, 50, 0.2);
+  transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 280ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.gloss-dark:hover { transform: translateY(-1px); }
+
+.gloss-rose {
+  background:
+    linear-gradient(180deg, #ff8fd0 0%, #c84bee 60%, #8b5cf6 100%);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  color: #fff;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    inset 0 -1px 0 rgba(80, 20, 100, 0.4),
+    0 14px 40px rgba(208, 76, 232, 0.36),
+    0 4px 12px rgba(139, 92, 246, 0.24);
+  transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 280ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.gloss-rose:hover { transform: translateY(-1px); box-shadow:
+  inset 0 1px 0 rgba(255, 255, 255, 0.7),
+  0 20px 50px rgba(208, 76, 232, 0.5),
+  0 6px 16px rgba(139, 92, 246, 0.3); }
+
+/* Soft inner emboss for input chrome */
+.glass-input {
+  background: rgba(255, 255, 255, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  box-shadow:
+    inset 0 1px 2px rgba(60, 30, 90, 0.05),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.6);
+}
+.glass-input:focus-within {
+  border-color: rgba(208, 76, 232, 0.4);
+  box-shadow:
+    inset 0 1px 2px rgba(60, 30, 90, 0.06),
+    0 0 0 4px rgba(208, 76, 232, 0.1);
+}
+
+/* ── Grain noise overlay ───────────────────────────────────────────── */
+
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+/* ── Custom animations ─────────────────────────────────────────────── */
+
+@keyframes float-slow {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(4%, -3%) scale(1.04); }
+  66% { transform: translate(-3%, 4%) scale(0.98); }
+}
+
+@keyframes float-medium {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-5%, 5%) scale(1.07); }
+}
+
+@keyframes breathe {
+  0%, 100% { opacity: 0.85; }
+  50% { opacity: 1; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.85); opacity: 0.6; }
+  100% { transform: scale(1.55); opacity: 0; }
+}
+
+/* Idle-attention pulse — a soft rose halo expanding outward behind the
+   dial pill, to draw a first-time visitor's eye to the primary action. */
+@keyframes dial-halo {
+  0%   { transform: scale(0.92); opacity: 0.55; }
+  70%  { transform: scale(1.35); opacity: 0;    }
+  100% { transform: scale(1.35); opacity: 0;    }
+}
+
+.dial-halo-wrap { position: relative; }
+.dial-halo-wrap::before,
+.dial-halo-wrap::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(255, 110, 199, 0.55) 0%, rgba(208, 76, 232, 0.18) 55%, transparent 75%);
+  pointer-events: none;
+  z-index: -1;
+  animation: dial-halo 2.4s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+.dial-halo-wrap::after {
+  animation-delay: 1.2s;
+}
+
+/* Vertical bobbing arrow hint */
+@keyframes nudge-down {
+  0%, 100% { transform: translateY(0); opacity: 0.7; }
+  50%      { transform: translateY(4px); opacity: 1; }
+}
+.animate-nudge { animation: nudge-down 1.6s ease-in-out infinite; }
+
+.animate-rise { animation: rise-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.animate-fade { animation: fade-in 0.6s ease both; }
+
+/* ── Scrollbar ─────────────────────────────────────────────────────── */
+
+.thin-scrollbar::-webkit-scrollbar { width: 4px; height: 4px; }
+.thin-scrollbar::-webkit-scrollbar-track { background: transparent; }
+.thin-scrollbar::-webkit-scrollbar-thumb { background: rgba(28, 24, 32, 0.14); border-radius: 4px; }
+.thin-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(28, 24, 32, 0.28); }
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }
+
+/* ── Utility ───────────────────────────────────────────────────────── */
+
+.text-balance { text-wrap: balance; }
+.text-pretty { text-wrap: pretty; }
+
+.divider-vertical {
+  width: 1px;
+  background: linear-gradient(180deg, transparent, rgba(28, 24, 32, 0.1), transparent);
+}

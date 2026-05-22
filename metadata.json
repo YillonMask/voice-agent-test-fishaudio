@@ -1,0 +1,6 @@
+{
+  "name": "Debt Collection Voice Agent Portal",
+  "description": "An interactive, real-time debt collection voice agent call simulator powered by the Gemini Live API, featuring speech-to-speech interaction, call flow visualization, objection handling dashboard, and regulatory compliance logs.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
