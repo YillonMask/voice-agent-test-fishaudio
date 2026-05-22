@@ -1,8 +1,8 @@
 """FDCPA compliance gate.
 
-Per Section 7 of the verified architecture doc: rule-first regex layer for the
-obvious violations (~1ms), LLM classifier only on ambiguous output, and a
-rewrite loop capped at 2 iterations before falling back to a canned safe line.
+Rule-first regex layer for the obvious violations (~1ms), LLM classifier
+only on ambiguous output, and a rewrite loop capped at 2 iterations before
+falling back to a canned safe line.
 """
 
 from __future__ import annotations

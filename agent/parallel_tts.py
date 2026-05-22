@@ -4,8 +4,8 @@ LiveKit's built-in `tts.StreamAdapter` already cuts incoming LLM text into
 sentences via a tokenizer and feeds each sentence to `synthesize()`. It does
 this serially though — sentence N+1's `synthesize()` only starts after every
 audio frame of sentence N has arrived. With a network-bound TTS like
-Gemini 3.1 Flash TTS that has a multi-hundred-millisecond first-byte latency
-per request, this leaves the second-half of a multi-sentence reply waiting on
+Fish Audio that has a multi-hundred-millisecond first-byte latency per
+request, this leaves the second-half of a multi-sentence reply waiting on
 the wire instead of preparing in the background.
 
 This adapter is a drop-in replacement that fans out `synthesize()` calls

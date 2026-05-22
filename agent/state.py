@@ -1,8 +1,8 @@
 """Conversation state persisted by the LangGraph checkpointer per LiveKit room.
 
-Mirrors the design from the verified architecture doc Section 6: a `messages`
-field with the `add_messages` reducer for LangChain message history, plus
-business-state fields that the checkpointer carries across user turns.
+A `messages` field with the `add_messages` reducer holds the LangChain
+message history; the remaining fields are business state the checkpointer
+carries across user turns (stage, identity_verified, verify_attempts, etc.).
 """
 
 from __future__ import annotations
